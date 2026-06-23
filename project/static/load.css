@@ -1,0 +1,66 @@
+/* Load Page Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #1c1c1c, #333); /* Dark background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+}
+
+h1 {
+    color: #ddd; /* Light gray */
+}
+
+form {
+    background: #222; /* Dark gray */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+
+label {
+    font-weight: bold;
+    color: white;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    width: 100%;
+    background: #333;
+    color: white;
+}
+
+/* Dark Lavender Button */
+button {
+    padding: 14px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #5a3f75; /* Dark Lavender */
+    color: white;
+}
+
+button:hover {
+    background-color: #4b3264; /* Slightly darker lavender */
+}
+
+/* Message Display */
+p {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #b19cd9;
+}

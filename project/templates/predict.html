@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Prediction</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='predict.css') }}">
+
+</head>
+<body>
+    <h1>Expense Prediction</h1>
+    
+    <form method="POST" action="/predict">
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required><br><br>
+
+        <label for="month">Month (1-12):</label>
+        <input type="number" id="month" name="month" min="1" max="12" required><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if predictions %}
+        <h2>Predicted Expenses for {{ month }}/{{ year }}</h2>
+        <ul>
+            {% for category, expense in predictions.items() %}
+                <li><strong>{{ category }}:</strong> {{ expense }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Bar Chart -->
+        <h2>Expense Prediction Chart</h2>
+        <canvas id="expenseChart"></canvas>
+
+        <script>
+            var ctx = document.getElementById('expenseChart').getContext('2d');
+            var expenseChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{% for category in predictions.keys() %}"{{ category }}",{% endfor %}],
+                    datasets: [{
+                        label: 'Predicted Expense ($)',
+                        data: [{% for expense in predictions.values() %}{{ expense.split("$")[1] }},{% endfor %}],
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Set Goal | Spend Squad</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='goal.css') }}">
+</head>
+<body>
+    <h2>Set Your Monthly Goal</h2>
+    <form method="POST">
+        <label for="month">Month:</label>
+        <input type="number" id="month" name="month" required>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required>
+
+        <label for="goal_amount">Goal Savings Amount:</label>
+        <input type="number" id="goal_amount" name="goal_amount" step="0.01" required>
+
+        <button type="submit">Save Goal</button>
+    </form>
+</body>
+</html>

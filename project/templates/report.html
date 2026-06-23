@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='report.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .chart-container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Expense Report for {{ selected_year }}-{{ selected_month }}</h2>
+
+    <!-- Form to select year and month -->
+    <form action="{{ url_for('report') }}" method="get">
+        <label for="year">Year:</label>
+        <select name="year" id="year">
+            {% for y in range(2020, 2031) %}
+                <option value="{{ y }}" {% if y|string == selected_year %}selected{% endif %}>{{ y }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="month">Month:</label>
+        <select name="month" id="month">
+            {% for m in range(1, 13) %}
+                <option value="{{ "%02d"|format(m) }}" {% if "%02d"|format(m) == selected_month %}selected{% endif %}>
+                    {{ "%02d"|format(m) }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">View Report</button>
+    </form>
+
+    <!-- Bar Chart Container -->
+    <div class="chart-container">
+        <canvas id="expenseChart"></canvas>
+    </div>
+
+    <!-- Display Report Data in a Table -->
+    {% if report_data %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Total Expense</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in report_data %}
+                <tr>
+                    <td>{{ row.Category }}</td>
+                    <td>{{ row.Total_Expense }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p style="text-align: center;">No expense data available for this period.</p>
+    {% endif %}
+
+    <!-- Chart.js Script for Bar Chart -->
+    <script>
+        var reportData = {{ report_data | tojson }};
+
+        var categoryTotals = {};
+        
+        // Process data to get total amount per category
+        reportData.forEach(function(expense) {
+            var category = expense.Category;
+            var amount = parseFloat(expense.Total_Expense) || 0;
+
+            if (category in categoryTotals) {
+                categoryTotals[category] += amount;
+            } else {
+                categoryTotals[category] = amount;
+            }
+        });
+
+        var labels = Object.keys(categoryTotals);
+        var values = Object.values(categoryTotals);
+
+        var ctx = document.getElementById('expenseChart').getContext('2d');
+        var expenseChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Expense by Category',
+                    data: values,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

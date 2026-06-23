@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Set Budget | Spend Squad</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='budget.css') }}">
+</head>
+<body>
+    <h2>Set Your Monthly Budget</h2>
+    <form action="/budget" method="POST">
+        <label for="month">Month:</label>
+        <input type="number" id="month" name="month" required>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required>
+
+        <label for="budget_amount">Budget Amount:</label>
+        <input type="number" id="budget_amount" name="budget_amount" required>
+
+        <button type="submit">Save Budget</button>
+    </form>
+</body>
+</html>

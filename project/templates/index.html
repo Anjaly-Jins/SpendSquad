@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page | Spend Squad</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Spend Squad Title with Gold Gradient -->
+        <h1>Welcome to <span class="spend-squad-title">Spend Squad</span> 💰</h1>
+
+        <!-- Centered Money Image -->
+        <img src="{{ url_for('static', filename='money-icon.png') }}" alt="Money Icon" class="money-icon">
+
+        <!-- Buttons at Bottom -->
+        <div class="button-container">
+            <a href="{{ url_for('load') }}"><button class="btn">Add Expense</button></a>
+            <a href="{{ url_for('predict') }}"><button class="btn">Predict</button></a>
+            <a href="{{ url_for('report') }}"><button class="btn">Report</button></a>
+            <a href="{{ url_for('budget') }}"><button class="btn">Budget</button></a>
+            <a href="{{ url_for('goal') }}"><button class="btn">Goal</button></a>
+        </div>
+    </div>
+
+</body>
+</html>

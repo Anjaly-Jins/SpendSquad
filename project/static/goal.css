@@ -1,0 +1,74 @@
+/* Goal Page Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #1c1c1c, #333); /* Dark background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+}
+
+.container {
+    background: #222; /* Dark gray container */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.1);
+    width: 320px;
+    text-align: center;
+}
+
+h1 {
+    color: #ddd; /* Light gray */
+    font-size: 1.8rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-weight: bold;
+    color: white;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    width: 100%;
+    background: #333;
+    color: white;
+}
+
+/* Button with Dark Lavender */
+button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #5a3f75; /* Dark Lavender */
+    color: white;
+}
+
+button:hover {
+    background-color: #4b3264; /* Slightly darker lavender */
+}
+
+/* Goal Badge */
+.badge {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
