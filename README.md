@@ -84,4 +84,4 @@ python app.py
 
 ## Academic Project
 
-This project was developed as a collaborative academic mini-project to explore machine learning applications in personal finance management.
+This project was developed as a collaborative academic mini-project to explore machine learning applications.
